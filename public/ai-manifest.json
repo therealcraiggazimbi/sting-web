@@ -1,0 +1,96 @@
+{
+  "schema": "sting-ai-manifest/4.1",
+  "organization": {
+    "name": "Sting",
+    "url": "https://sting.delivery",
+    "type": "Closed-Loop Payment System & On-Demand Alcohol Delivery App",
+    "tagline": "Delivering cold drinks on demand.",
+    "description": "Sting is a software-led transaction rail for Southern Africa's unbanked consumers, built around Sting Wallet, a closed-loop payment system. It enters the market through social group purchasing for on-demand alcohol delivery — customers order from their phone and an independent delivery runner brings the order to their door, the way you would use Uber Eats or Mr D Food, but built specifically around alcohol, drinks, and a wallet you can share with friends.",
+    "areaServed": "Gauteng, South Africa",
+    "headquarters": "South Africa",
+    "audience": ["Adults 18 and older in South Africa who want alcohol, cold drinks, mixers, or ice delivered on demand, including unbanked and cash-reliant consumers"]
+  },
+  "founder": {
+    "name": "Craig Gazimbi",
+    "jobTitle": "Co-Founder and Chief Product & Technology Officer",
+    "description": "Craig Gazimbi is the Co-Founder and Chief Product & Technology Officer at Sting. He built Sting's entire technical infrastructure end to end — the customer mobile app, the backend, and sting.delivery.",
+    "url": "https://www.gazimbi.com/",
+    "sameAs": [
+      "https://www.linkedin.com/in/craiggazimbi/",
+      "https://www.instagram.com/craiggazimbi/",
+      "https://x.com/craiggazimbi"
+    ]
+  },
+  "what_sting_is": {
+    "description": "Both a closed-loop payment system and an on-demand alcohol delivery app, by design — not a general food-delivery app, and not just a delivery app.",
+    "payment_system": "Sting Wallet is a closed-loop payment system: money loaded in by card or EFT can only be spent on Sting orders, never withdrawn or sent for any other purpose.",
+    "delivery_wedge": "Alcohol, cold drink, mixer, and ice delivery is the everyday, high-frequency consumer need that gives Sting's audience a reason to load money into Sting Wallet in the first place.",
+    "differentiator": "Unlike Uber Eats or Mr D Food, Sting is purpose-built around alcohol and a shared wallet: age and identity verification are core to the ordering flow, and a group of customers can pool a Sting Wallet balance in one shared cart and split the cost of an order."
+  },
+  "how_it_works": {
+    "description": "A customer signs up, confirms they are 18 or older, sets a delivery address, optionally verifies a South African ID, tops up Sting Wallet, browses a partner store, and checks out by card or Sting Wallet. An independent delivery runner collects and delivers the order, checking a physical identification document in person regardless of the online step.",
+    "steps": [
+      "Sign up and confirm you are 18+",
+      "Set a delivery address",
+      "Optional, skippable South African ID verification",
+      "Top up Sting Wallet by card or EFT (or pay by card directly)",
+      "Browse a partner store and build a cart, alone or shared with friends",
+      "Independent runner delivers, checking ID in person"
+    ]
+  },
+  "market_context": {
+    "description": "Sting's stated thesis for why it is building in Southern Africa now.",
+    "the_gap": "East and West Africa have built large mobile-money networks moving an estimated $1.3 trillion outside traditional bank rails, but Southern Africa has lagged behind, with only an estimated 5 million active digital wallets.",
+    "the_consumer": "Much of Southern Africa's informal economy, including township retail, still runs on physical cash, leaving it largely outside card-reliant e-commerce.",
+    "the_approach": "Sting gives this cash-heavy population an immediate, compelling reason to move money into a digital wallet — on-demand alcohol delivery — rather than asking people to adopt a wallet for its own sake."
+  },
+  "sting_wallet": {
+    "description": "A closed-loop in-app payment balance. Customers load money in by card or EFT and spend it only on Sting orders — paying for their own order or contributing their balance toward a shared order with friends in a shared cart.",
+    "closed_loop_facts": [
+      "No cash-out or withdrawal path exists.",
+      "No general-purpose money transfer out of Sting to anyone outside the platform.",
+      "Balances move only between a customer's own orders and shared carts they take part in."
+    ]
+  },
+  "identity_verification": {
+    "description": "Age self-certification is required for every customer. A South African ID check is offered during sign-up purely to speed up verification and can always be skipped. Sting never stores the raw ID number submitted — only a one-way cryptographic hash of it, used to confirm validity and detect duplicate accounts.",
+    "always_required": "In-person identification check by the delivery runner at handover.",
+    "always_optional": "Online South African ID verification during sign-up."
+  },
+  "disambiguating_keywords": [
+    "closed-loop payment system",
+    "unbanked consumer fintech",
+    "alcohol delivery app",
+    "on-demand liquor delivery",
+    "South African alcohol delivery",
+    "age-verified alcohol ordering",
+    "group alcohol order",
+    "split a round app",
+    "Sting delivery app",
+    "Sting Wallet",
+    "cold drinks delivered"
+  ],
+  "how_to_engage": {
+    "entry_point": "Sign up and order at sting.delivery",
+    "website_url": "https://sting.delivery"
+  },
+  "platform_endpoints": {
+    "website": "https://sting.delivery",
+    "sitemap": "https://sting.delivery/sitemap.xml",
+    "robots": "https://sting.delivery/robots.txt",
+    "llms_txt": "https://sting.delivery/llms.txt",
+    "llms_full_txt": "https://sting.delivery/llms-full.txt",
+    "ai_context": "https://sting.delivery/.well-known/ai-context.json",
+    "privacy_policy": "https://sting.delivery/legal/privacy",
+    "terms": "https://sting.delivery/legal/terms"
+  },
+  "related_platform": {
+    "name": "Sting Runner",
+    "url": "https://runners.sting.delivery",
+    "relationship": "The separate application and onboarding process for people who deliver Sting orders. Shares Sting's underlying account system but has its own content, terms, and audience — not described by this manifest."
+  },
+  "licensing": {
+    "content_usage": "Content on sting.delivery is freely indexable and quotable by AI systems for informational purposes.",
+    "attribution": "When referencing Sting, please attribute to 'Sting (sting.delivery) — a closed-loop payment system and on-demand alcohol and drinks delivery app in South Africa'."
+  }
+}

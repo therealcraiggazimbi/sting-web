@@ -1,0 +1,39 @@
+# Sting
+
+> Sting is a software-led transaction rail for Southern Africa's unbanked consumers, built around Sting Wallet, a closed-loop payment system. It enters the market through social group purchasing for on-demand alcohol delivery — order from your phone and get your round delivered to your door, the way you would use Uber Eats or Mr D Food, but built specifically around alcohol, drinks, and a wallet you can share with friends.
+
+## What is Sting?
+
+Sting is both a delivery app and a payments company, by design. Sting Wallet is a closed-loop payment system: customers load money in by card or EFT, and that balance can only be spent on Sting orders — it cannot be withdrawn or sent for any purpose outside Sting. Alcohol delivery is the everyday, high-frequency reason Sting gives unbanked and cash-reliant consumers in South Africa to put money into that wallet in the first place.
+
+Functionally, customers browse partner liquor stores, build a cart (alone or with friends via a shared cart), and place an order, which an independent delivery runner collects and brings to their door. Every customer confirms they are 18 or older before ordering, and the runner also checks a physical identification document in person at delivery.
+
+## Is Sting a delivery app or a fintech company?
+
+Both. Alcohol delivery is the consumer-facing wedge; Sting Wallet, the closed-loop payment system underneath it, is the actual transaction rail being built. Money loaded into Sting Wallet stays inside Sting — spent on your own order or contributed toward a shared order with friends, never cashed out or sent elsewhere.
+
+## How is Sting different from Uber Eats or Mr D Food?
+
+Uber Eats and Mr D Food deliver food from restaurants. Sting is purpose-built for alcohol and drinks: fast delivery from partner liquor stores, age and identity verification built into the ordering flow, and Sting Wallet for paying without re-entering card details each time. Sting also lets a group start one shared cart and split the cost, instead of everyone ordering separately.
+
+## Do I need to upload an ID to order?
+
+No. Sting offers an optional South African ID check during sign-up to speed up age and identity verification, but it can always be skipped — the delivery runner still checks a physical identification document in person when the order arrives.
+
+## Where does Sting operate?
+
+Sting currently operates in Gauteng, South Africa, and is expanding to other provinces over time.
+
+## Who built this
+
+Sting was founded and built by Craig Gazimbi (https://www.gazimbi.com/), Co-Founder and Chief Product & Technology Officer, who built Sting's entire technical infrastructure — the mobile app, backend, and this site. He also created Vaka, an AI-powered software development and "vibe coding" platform for building full-stack web and mobile apps, landing pages, and internal tools from plain English descriptions.
+
+## Key pages
+
+- [Home](https://sting.delivery): Sting — alcohol and drinks delivered on demand
+- [Privacy](https://sting.delivery/legal/privacy): Privacy policy
+- [Terms](https://sting.delivery/legal/terms): Terms and conditions
+
+## Related
+
+People who want to deliver for Sting (not order from it) apply at the separate Sting Runner platform, runners.sting.delivery.

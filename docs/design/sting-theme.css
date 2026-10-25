@@ -1,0 +1,111 @@
+/* ============================================================
+   STING DESIGN SYSTEM — theme tokens
+   Editorial · restrained · Vercel/Linear-grade precision
+   Drop this into any project. Two ways to consume:
+   (A) Plain CSS custom properties  → use the :root block below.
+   (B) Tailwind v4                  → paste the @theme block at the bottom.
+   ============================================================ */
+
+:root {
+  /* — Core surfaces & text (light) — */
+  --background:          oklch(1.000 0.000 263);  /* #FFFFFF  app canvas          */
+  --foreground:         oklch(0.264 0.000 263);  /* #252525  primary ink          */
+  --card:               oklch(1 0 0);            /* #FFFFFF  raised surfaces       */
+  --card-foreground:    oklch(0.264 0.000 263);  /* #252525                        */
+  --muted:              oklch(0.976 0.000 263);  /* #F7F7F7  neutral fills / chips */
+  --muted-foreground:   oklch(0.633 0.000 263);  /* #8A8A8A  secondary text        */
+  --border:             oklch(0.940 0.000 263);  /* #EBEBEB  hairlines             */
+
+  /* — Brand — */
+  --primary:            oklch(0.546 0.215 263);  /* #2563EB  brand / CTA / signal  */
+  --primary-foreground: oklch(1.000 0.000 263);  /* #FFFFFF                        */
+  --primary-tint:       oklch(0.965 0.022 263);  /* soft brand wash                */
+  --primary-line:       oklch(0.845 0.055 263);  /* brand hairline / rail          */
+  --secondary-indigo:   oklch(0.660 0.100 263);  /* data-viz secondary             */
+
+  /* — Inverse / finale (dark) — */
+  --ink:                oklch(0.218 0.000 266);  /* #1A1A1A  dark canvas           */
+  --ink-card:           oklch(0.297 0.000 266);  /* #2D2D2D                        */
+  --ink-border:         oklch(0.340 0.034 266);  /* dark finale hairline           */
+  --ink-text:           oklch(0.985 0.000 266);  /* #FAFAFA                        */
+  --ink-muted:          oklch(0.770 0.000 266);  /* #B4B4B4                        */
+  --accent-light:       oklch(0.740 0.138 266);  /* numerals on dark               */
+
+  /* — Form — */
+  --radius:      0.625rem;   /* 10px — cards          */
+  --radius-chip: 0.375rem;   /* 6px  — icon chips     */
+  --radius-pill: 999px;      /* full — pills / badges */
+  --hairline:    0.5px;      /* razor-thin borders    */
+
+  /* — Motion — */
+  --ease:      cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-quick: 200ms;   /* hovers, toggles          */
+  --dur-enter: 550ms;   /* entrance reveals         */
+
+  /* — Type — */
+  --font-sans: "Google Sans", "Product Sans", ui-sans-serif, system-ui,
+               -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Consolas", "Menlo", monospace;
+}
+
+/* ---- Semantic utility classes (framework-free) ---- */
+.sr-bg            { background-color: var(--background); }
+.sr-fg            { color: var(--foreground); }
+.sr-card          { background: var(--card); border: var(--hairline) solid var(--border);
+                    border-radius: var(--radius); }
+.sr-muted         { background: var(--muted); }
+.sr-muted-fg      { color: var(--muted-foreground); }
+.sr-primary       { background: var(--primary); color: var(--primary-foreground); }
+.sr-primary-fg    { color: var(--primary); }
+.sr-tint          { background: var(--primary-tint); }
+.sr-hairline      { border: var(--hairline) solid var(--border); }
+.sr-mono          { font-family: var(--font-mono); }
+.sr-sans          { font-family: var(--font-sans); }
+
+/* Signature "eyebrow" label */
+.sr-eyebrow       { display: flex; align-items: center; gap: 0.75rem;
+                    font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; }
+.sr-eyebrow .num  { font-family: var(--font-mono); color: var(--primary); letter-spacing: 0; }
+.sr-eyebrow .lbl  { color: var(--muted-foreground); }
+
+/* Quiet, sharp interaction — flat, no shadows */
+.sr-hover         { transition: all var(--dur-quick) ease-out; }
+.sr-hover:hover   { transform: translateY(-2px);
+                    border-color: color-mix(in oklch, var(--foreground) 30%, var(--border)); }
+
+/* Entrance reveal (add inline animation-delay to stagger) */
+@keyframes sr-rise { from { opacity: 0; transform: translateY(10px); }
+                     to   { opacity: 1; transform: translateY(0); } }
+.sr-reveal        { opacity: 0; animation: sr-rise var(--dur-enter) var(--ease) forwards; }
+
+
+/* ============================================================
+   TAILWIND v4 — paste into globals.css instead of the above.
+   Class names resolve natively: bg-background, text-foreground,
+   bg-card, bg-primary, text-muted-foreground, border-border,
+   rounded-lg, etc.
+   ------------------------------------------------------------
+@theme {
+  --color-background:         oklch(1.000 0.000 263);
+  --color-foreground:         oklch(0.264 0.000 263);
+  --color-card:               oklch(1 0 0);
+  --color-card-foreground:    oklch(0.264 0.000 263);
+  --color-muted:              oklch(0.976 0.000 263);
+  --color-muted-foreground:   oklch(0.633 0.000 263);
+  --color-border:             oklch(0.940 0.000 263);
+  --color-primary:            oklch(0.546 0.215 263);
+  --color-primary-foreground: oklch(1.000 0.000 263);
+  --color-primary-tint:       oklch(0.965 0.022 263);
+  --color-primary-line:       oklch(0.845 0.055 263);
+  --color-secondary-indigo:   oklch(0.660 0.100 263);
+  --color-ink:                oklch(0.218 0.000 266);
+  --color-ink-card:           oklch(0.297 0.000 266);
+  --color-ink-border:         oklch(0.340 0.034 266);
+  --color-ink-text:           oklch(0.985 0.000 266);
+  --color-ink-muted:          oklch(0.770 0.000 266);
+  --color-accent-light:       oklch(0.740 0.138 266);
+  --radius-lg:  0.625rem;
+  --font-sans:  "Google Sans", "Product Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:  ui-monospace, "SF Mono", Consolas, Menlo, monospace;
+}
+   ============================================================ */

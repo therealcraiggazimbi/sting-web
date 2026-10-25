@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sting Runner — Design System</title>
+<style>
+  :root{
+    --background:oklch(1.000 0.000 263); --foreground:oklch(0.264 0.000 263);
+    --card:#fff; --muted:oklch(0.976 0.000 263); --muted-foreground:oklch(0.633 0.000 263);
+    --border:oklch(0.940 0.000 263); --primary:oklch(0.546 0.215 263);
+    --primary-foreground:#fff; --primary-tint:oklch(0.965 0.022 263);
+    --primary-line:oklch(0.845 0.055 263); --secondary-indigo:oklch(0.660 0.100 263);
+    --ink:oklch(0.218 0.000 266); --ink-card:oklch(0.297 0.000 266);
+    --ink-border:oklch(0.340 0.034 266); --ink-text:oklch(0.985 0.000 266);
+    --ink-muted:oklch(0.770 0.000 266); --accent-light:oklch(0.740 0.138 266);
+    --radius:0.625rem;
+    --font-sans:"Google Sans","Product Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono",Consolas,Menlo,monospace;
+  }
+  *{box-sizing:border-box;-webkit-font-smoothing:antialiased;}
+  body{margin:0;background:var(--background);color:var(--foreground);font-family:var(--font-sans);line-height:1.5;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  a{color:var(--primary);text-decoration:none;}
+  code,.mono{font-family:var(--font-mono);}
+  .hair{border:0.5px solid var(--border);}
+  .eyebrow{display:flex;align-items:center;gap:12px;font-size:11px;text-transform:uppercase;letter-spacing:.2em;}
+  .eyebrow .num{font-family:var(--font-mono);color:var(--primary);letter-spacing:0;}
+  .eyebrow .tick{width:1px;height:12px;background:var(--primary-line);}
+  .eyebrow .lbl{color:var(--muted-foreground);}
+  h1,h2,h3{font-weight:600;letter-spacing:-0.02em;margin:0;}
+  section{padding:64px 0;border-top:0.5px solid var(--border);}
+  section:first-of-type{border-top:none;}
+  .lead{color:var(--muted-foreground);max-width:64ch;}
+  .grid{display:grid;gap:16px;}
+  .card{background:var(--card);border:0.5px solid var(--border);border-radius:var(--radius);padding:22px;transition:all .2s ease-out;}
+  .card.hoverable:hover{transform:translateY(-2px);border-color:color-mix(in oklch,var(--foreground) 30%,var(--border));}
+  .chip{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;}
+  .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:5px 12px;font-size:12px;}
+
+  /* hero */
+  header.hero{padding:72px 0 40px;}
+  .word{font-size:96px;line-height:.95;letter-spacing:-0.03em;}
+  @media(max-width:640px){.word{font-size:64px;}}
+
+  /* swatches */
+  .sw-grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));}
+  .sw{border:0.5px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--card);}
+  .sw .chip-lg{height:88px;}
+  .sw .meta{padding:12px 14px;}
+  .sw .nm{font-size:13px;font-weight:600;}
+  .sw .ro{font-size:11.5px;color:var(--muted-foreground);margin-top:1px;}
+  .sw .val{font-family:var(--font-mono);font-size:11px;color:var(--muted-foreground);margin-top:8px;}
+  .sw .val b{color:var(--foreground);font-weight:400;}
+
+  /* type scale */
+  .type-row{display:flex;align-items:baseline;gap:20px;padding:14px 0;border-bottom:0.5px solid var(--border);}
+  .type-row .spec{font-family:var(--font-mono);font-size:11px;color:var(--muted-foreground);width:190px;flex:none;}
+
+  /* token defs */
+  .defs{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));}
+  .def{padding:16px 18px;}
+  .def .k{font-family:var(--font-mono);font-size:12px;color:var(--primary);}
+  .def .v{font-size:14px;margin-top:4px;}
+  .def .d{font-size:12px;color:var(--muted-foreground);margin-top:6px;}
+
+  /* do / avoid */
+  .cols2{grid-template-columns:1fr 1fr;}
+  @media(max-width:640px){.cols2{grid-template-columns:1fr;}}
+  .tag{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:8px 12px;border-radius:8px;margin:4px 6px 0 0;}
+  .tag.do{background:var(--primary-tint);color:var(--foreground);}
+  .tag.no{background:var(--muted);color:var(--muted-foreground);}
+
+  /* dark demo */
+  .finale{background:var(--ink);border-radius:var(--radius);padding:34px;color:var(--ink-text);}
+  .finale .eyebrow .num{color:var(--accent-light);}
+  .finale .eyebrow .lbl{color:var(--ink-muted);}
+  .finale .tick{background:color-mix(in oklch,var(--accent-light) 40%,var(--ink-border));}
+  .finale .fcard{background:var(--ink-card);border:0.5px solid var(--ink-border);border-radius:var(--radius);padding:18px;}
+  .finale .fmuted{color:var(--ink-muted);}
+  .finale .faccent{color:var(--accent-light);}
+
+  /* code */
+  pre{background:#0f1118;color:#e7e9f0;border-radius:var(--radius);padding:18px 20px;overflow:auto;font-family:var(--font-mono);font-size:12.5px;line-height:1.55;}
+  .codewrap{position:relative;}
+  .copy{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.08);color:#cfd3df;border:0.5px solid rgba(255,255,255,.16);border-radius:6px;font-size:11px;padding:5px 10px;cursor:pointer;font-family:var(--font-sans);transition:all .2s ease-out;}
+  .copy:hover{background:rgba(255,255,255,.16);}
+  .allocbar{display:flex;height:12px;border-radius:999px;overflow:hidden;}
+  footer{padding:40px 0 64px;border-top:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;color:var(--muted-foreground);font-size:13px;flex-wrap:wrap;gap:10px;}
+  .section-head{margin-bottom:26px;}
+  .section-head h2{font-size:30px;margin-top:10px;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow"><span class="num">STING</span><span class="tick"></span><span class="lbl">Design System · v1</span></div>
+    <div class="word" style="margin-top:22px;">Sting Runner</div>
+    <p class="lead" style="font-size:20px;color:var(--foreground);margin-top:18px;max-width:60ch;">
+      Editorial clarity for a premium AI platform. Quiet confidence over decoration —
+      razor-thin lines, disciplined rhythm, one deep-indigo signal, and generous whitespace.
+    </p>
+  </header>
+
+  <!-- LOOK & FEEL -->
+  <section>
+    <div class="section-head">
+      <div class="eyebrow"><span class="num">01</span><span class="tick"></span><span class="lbl">Look &amp; Feel</span></div>
+      <h2>Vercel/Linear-grade minimalism</h2>
+    </div>
+    <p class="lead">
+      The system reads like a well-set document, not a marketing page. Structure comes from
+      hairline borders and soft neutral fills — never shadows or gradients. Colour is rationed:
+      the interface is almost entirely ink-on-paper, with a single deep indigo reserved for the
+      things that matter (a CTA, an active state, the one card you want the eye to land on).
+      Motion is sharp and brief. Numbers, codes and labels are set in monospace to add a
+      technical, precise texture against the humanist sans.
+    </p>
+    <div style="margin-top:18px;">
+      <span class="tag do">✓ Hairline borders (0.5px)</span>
+      <span class="tag do">✓ Flat surfaces + tint for depth</span>
+      <span class="tag do">✓ One indigo signal per view</span>
+      <span class="tag do">✓ Mono numerals &amp; labels</span>
+      <span class="tag do">✓ Generous whitespace</span>
+      <br>
+      <span class="tag no">✕ Drop shadows / glows</span>
+      <span class="tag no">✕ Gradients</span>
+      <span class="tag no">✕ Multiple accent colours</span>
+      <span class="tag no">✕ Rounded-bubbly / playful UI</span>
+      <span class="tag no">✕ Dense, cramped layouts</span>
+    </div>
+  </section>
+
+  <!-- COLOR: LIGHT -->
+  <section>
+    <div class="section-head">
+      <div class="eyebrow"><span class="num">02</span><span class="tick"></span><span class="lbl">Colour · Core (Light)</span></div>
+      <h2>Ink on paper, one indigo</h2>
+    </div>
+    <div class="grid sw-grid">
+      <!-- each swatch -->
+      <div class="sw"><div class="chip-lg" style="background:#FFFFFF;border-bottom:0.5px solid var(--border);"></div><div class="meta"><div class="nm">Background</div><div class="ro">App canvas</div><div class="val"><b>#FFFFFF</b> · oklch(1.000 0.000 263)</div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#252525;"></div><div class="meta"><div class="nm">Foreground · Ink</div><div class="ro">Primary text</div><div class="val"><b>#252525</b> · oklch(0.264 0.000 263)</div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#FFFFFF;border-bottom:0.5px solid var(--border);"></div><div class="meta"><div class="nm">Card</div><div class="ro">Raised surfaces</div><div class="val"><b>#FFFFFF</b> · oklch(1 0 0)</div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#2563EB;"></div><div class="meta"><div class="nm">Primary</div><div class="ro">Brand · CTA · signal</div><div class="val"><b>#2563EB</b> · oklch(0.546 0.215 263)</div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#ECF4FF;border-bottom:0.5px solid var(--border);"></div><div class="meta"><div class="nm">Primary Tint</div><div class="ro">Soft brand wash</div><div class="val"><b>#ECF4FF</b> · 6% primary</div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#F7F7F7;border-bottom:0.5px solid var(--border);"></div><div class="meta"><div class="nm">Muted</div><div class="ro">Neutral fills · chips</div><div class="val"><b>#F7F7F7</b> · oklch(0.976 0.000 263)</div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#8A8A8A;"></div><div class="meta"><div class="nm">Muted Foreground</div><div class="ro">Secondary text</div><div class="val"><b>#8A8A8A</b> · oklch(0.633 0.000 263)</div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#EBEBEB;"></div><div class="meta"><div class="nm">Border</div><div class="ro">Hairlines</div><div class="val"><b>#EBEBEB</b> · oklch(0.940 0.000 263)</div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#B9CDF1;"></div><div class="meta"><div class="nm">Primary Line</div><div class="ro">Brand rail / tick</div><div class="val"><b>#B9CDF1</b></div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#7292D0;"></div><div class="meta"><div class="nm">Secondary Indigo</div><div class="ro">Data-viz secondary</div><div class="val"><b>#7292D0</b></div></div></div>
+    </div>
+  </section>
+
+  <!-- COLOR: DARK -->
+  <section>
+    <div class="section-head">
+      <div class="eyebrow"><span class="num">03</span><span class="tick"></span><span class="lbl">Colour · Inverse (Dark finale)</span></div>
+      <h2>Reserved for hero &amp; closing moments</h2>
+    </div>
+    <p class="lead" style="margin-bottom:22px;">Not a full dark mode — an accent surface. Use it for the opening or the final "vision" beat, where <span style="color:var(--primary);">primary</span> is too dark to read and numerals shift to a lighter indigo.</p>
+    <div class="grid sw-grid">
+      <div class="sw"><div class="chip-lg" style="background:#1A1A1A;"></div><div class="meta"><div class="nm">Ink</div><div class="ro">Dark canvas</div><div class="val"><b>#1A1A1A</b></div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#2D2D2D;"></div><div class="meta"><div class="nm">Ink Card</div><div class="ro">Dark surfaces</div><div class="val"><b>#2D2D2D</b></div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#30384A;"></div><div class="meta"><div class="nm">Ink Border</div><div class="ro">Dark hairlines</div><div class="val"><b>#30384A</b></div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#FAFAFA;border-bottom:0.5px solid var(--border);"></div><div class="meta"><div class="nm">Ink Text</div><div class="ro">Text on ink</div><div class="val"><b>#FAFAFA</b></div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#9AA1B2;"></div><div class="meta"><div class="nm">Ink Muted</div><div class="ro">Secondary on ink</div><div class="val"><b>#9AA1B2</b></div></div></div>
+      <div class="sw"><div class="chip-lg" style="background:#82A7FF;"></div><div class="meta"><div class="nm">Accent Light</div><div class="ro">Numerals on ink</div><div class="val"><b>#82A7FF</b></div></div></div>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section>
+    <div class="section-head">
+      <div class="eyebrow"><span class="num">04</span><span class="tick"></span><span class="lbl">Typography</span></div>
+      <h2>Google Sans + monospace accents</h2>
+    </div>
+    <div class="grid" style="grid-template-columns:1fr;gap:0;">
+      <div class="type-row"><div class="spec">Hero · 96px / 600 / -3% tracking</div><div style="font-size:52px;font-weight:600;letter-spacing:-0.03em;line-height:1;">Sting Runner</div></div>
+      <div class="type-row"><div class="spec">Section · 28–30px / 600 / -2%</div><div style="font-size:28px;font-weight:600;letter-spacing:-0.02em;">The Invisible Evolution</div></div>
+      <div class="type-row"><div class="spec">Card title · 16–18px / 600</div><div style="font-size:17px;font-weight:600;letter-spacing:-0.01em;">Active-Recall Sandbox</div></div>
+      <div class="type-row"><div class="spec">Body · 13–14px / 400</div><div style="font-size:14px;color:var(--muted-foreground);max-width:52ch;">People learn by doing. The platform builds real technical leverage through practical execution.</div></div>
+      <div class="type-row"><div class="spec">Eyebrow · 11px / 0.2em / UPPER</div><div class="eyebrow"><span class="num">05 / 08</span><span class="tick"></span><span class="lbl">The Business Model</span></div></div>
+      <div class="type-row"><div class="spec">Mono · numerals · codes · metrics</div><div class="mono" style="font-size:15px;">P2,015,846 &nbsp; · &nbsp; 65 / 35 &nbsp; · &nbsp; ZA · ZW · BW · KE</div></div>
+    </div>
+    <div class="grid cols2" style="margin-top:26px;">
+      <div class="card"><div class="eyebrow"><span class="lbl">Sans stack</span></div><p class="mono" style="font-size:12px;margin:10px 0 0;color:var(--muted-foreground);">"Google Sans", "Product Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif</p></div>
+      <div class="card"><div class="eyebrow"><span class="lbl">Mono stack</span></div><p class="mono" style="font-size:12px;margin:10px 0 0;color:var(--muted-foreground);">ui-monospace, "SF Mono", Consolas, Menlo, monospace</p></div>
+    </div>
+    <p class="lead" style="margin-top:16px;font-size:13px;">Google Sans is proprietary — license it for production, or fall back to the system stack. In Office/Slides exports, Calibri is the closest portable substitute.</p>
+  </section>
+
+  <!-- FORM TOKENS -->
+  <section>
+    <div class="section-head">
+      <div class="eyebrow"><span class="num">05</span><span class="tick"></span><span class="lbl">Form · Radius · Motion</span></div>
+      <h2>Sharp, flat, deliberate</h2>
+    </div>
+    <div class="grid defs">
+      <div class="def hair" style="border-radius:var(--radius);"><div class="k">--radius</div><div class="v">0.625rem · 10px</div><div class="d">Cards &amp; containers. Chips 6px, pills full.</div></div>
+      <div class="def hair" style="border-radius:var(--radius);"><div class="k">--hairline</div><div class="v">0.5px solid border</div><div class="d">Razor-thin. The primary source of structure.</div></div>
+      <div class="def hair" style="border-radius:var(--radius);"><div class="k">elevation</div><div class="v">none</div><div class="d">No shadows. Depth via hairline + tint only.</div></div>
+      <div class="def hair" style="border-radius:var(--radius);"><div class="k">hover</div><div class="v">translateY(-2px)</div><div class="d">+ border darkens toward ink. 200ms ease-out.</div></div>
+      <div class="def hair" style="border-radius:var(--radius);"><div class="k">--dur-quick</div><div class="v">200ms ease-out</div><div class="d">Toggles, hovers, state changes.</div></div>
+      <div class="def hair" style="border-radius:var(--radius);"><div class="k">--dur-enter</div><div class="v">550ms · rise</div><div class="d">Fade-up 10px, cubic-bezier(.22,1,.36,1), staggered.</div></div>
+      <div class="def hair" style="border-radius:var(--radius);"><div class="k">container</div><div class="v">1024–1152px</div><div class="d">Centred. Padding 24–48px. Whitespace is a feature.</div></div>
+      <div class="def hair" style="border-radius:var(--radius);"><div class="k">icons</div><div class="v">Lucide · 1.6 stroke</div><div class="d">16–18px, inside a rounded chip (muted or primary).</div></div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section>
+    <div class="section-head">
+      <div class="eyebrow"><span class="num">06</span><span class="tick"></span><span class="lbl">Component Patterns</span></div>
+      <h2>The building blocks</h2>
+    </div>
+
+    <div class="grid cols2">
+      <!-- CTA + pills -->
+      <div class="card">
+        <div class="eyebrow"><span class="lbl">Buttons &amp; badges</span></div>
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+          <button style="background:var(--primary);color:#fff;border:none;border-radius:var(--radius);padding:10px 16px;font-family:var(--font-sans);font-size:14px;cursor:pointer;">Primary CTA →</button>
+          <button style="background:var(--card);color:var(--foreground);border:0.5px solid var(--border);border-radius:var(--radius);padding:10px 16px;font-family:var(--font-sans);font-size:14px;cursor:pointer;">Secondary</button>
+          <span class="pill" style="background:var(--primary);color:#fff;"><span style="width:6px;height:6px;border-radius:999px;background:#fff;"></span>LIVE</span>
+          <span class="pill" style="background:var(--muted);color:var(--muted-foreground);">Months 1–6</span>
+        </div>
+      </div>
+
+      <!-- chips -->
+      <div class="card">
+        <div class="eyebrow"><span class="lbl">Icon chips</span></div>
+        <div style="margin-top:16px;display:flex;gap:12px;">
+          <div class="chip" style="background:var(--muted);"><span class="mono" style="color:var(--foreground);font-size:15px;">◆</span></div>
+          <div class="chip" style="background:var(--primary);"><span class="mono" style="color:#fff;font-size:15px;">◆</span></div>
+          <div class="chip" style="background:var(--primary-tint);"><span class="mono" style="color:var(--primary);font-size:15px;">◆</span></div>
+        </div>
+        <p class="lead" style="font-size:12.5px;margin-top:12px;">Neutral (muted) by default · primary fill for the active/branded one.</p>
+      </div>
+    </div>
+
+    <!-- emphasis trio -->
+    <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:16px;">
+      <div class="card hoverable">
+        <div class="chip" style="background:var(--muted);"></div>
+        <div style="font-weight:600;margin-top:14px;">Neutral card</div>
+        <p class="lead" style="font-size:12.5px;margin-top:6px;">Default surface. White, hairline, flat.</p>
+      </div>
+      <div class="card hoverable" style="background:var(--primary-tint);">
+        <div class="chip" style="background:var(--primary);"></div>
+        <div style="font-weight:600;margin-top:14px;">Tinted card</div>
+        <p class="lead" style="font-size:12.5px;margin-top:6px;">Soft wash to group or gently highlight.</p>
+      </div>
+      <div class="card hoverable" style="background:var(--primary);color:#fff;border-color:var(--primary);">
+        <div class="chip" style="background:rgba(255,255,255,.16);"></div>
+        <div style="font-weight:600;margin-top:14px;">Emphasis card</div>
+        <p style="font-size:12.5px;margin-top:6px;color:rgba(255,255,255,.85);">Solid primary — one per view, the hero pick.</p>
+      </div>
+    </div>
+
+    <!-- allocation bar -->
+    <div class="card" style="margin-top:16px;">
+      <div class="eyebrow"><span class="lbl">Data viz · segmented bar</span><span class="tick"></span><span class="mono" style="font-size:11px;color:var(--muted-foreground);">100%</span></div>
+      <div class="allocbar" style="margin-top:14px;">
+        <div style="width:65%;background:var(--primary);"></div>
+        <div style="width:35%;background:var(--secondary-indigo);"></div>
+      </div>
+      <p class="lead" style="font-size:12.5px;margin-top:10px;">Flat, labelled inline. Primary + secondary indigo — no third colour.</p>
+    </div>
+
+    <!-- dark finale -->
+    <div class="finale" style="margin-top:16px;">
+      <div class="eyebrow"><span class="num">08 / 08</span><span class="tick"></span><span class="lbl">Dark finale surface</span></div>
+      <h3 style="font-size:26px;margin-top:14px;">The Invisible Evolution</h3>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr);margin-top:18px;">
+        <div class="fcard"><div class="faccent" style="font-size:10px;letter-spacing:.15em;">NOW · VISIBLE</div><div style="font-weight:600;margin-top:6px;">Present</div></div>
+        <div class="fcard"><div class="faccent" style="font-size:10px;letter-spacing:.15em;">NEXT · AMBIENT</div><div style="font-weight:600;margin-top:6px;">Destination</div></div>
+        <div class="fcard"><div class="faccent" style="font-size:10px;letter-spacing:.15em;">ENDGAME</div><div style="font-weight:600;margin-top:6px;">Leverage</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOKENS -->
+  <section>
+    <div class="section-head">
+      <div class="eyebrow"><span class="num">07</span><span class="tick"></span><span class="lbl">Copy-paste Tokens</span></div>
+      <h2>Wire it into any project</h2>
+    </div>
+    <div class="codewrap">
+      <button class="copy" data-t="tw">Copy</button>
+      <pre id="tw">@theme {
+  --color-background:         oklch(1.000 0.000 263);
+  --color-foreground:         oklch(0.264 0.000 263);
+  --color-card:               oklch(1 0 0);
+  --color-muted:              oklch(0.976 0.000 263);
+  --color-muted-foreground:   oklch(0.633 0.000 263);
+  --color-border:             oklch(0.940 0.000 263);
+  --color-primary:            oklch(0.546 0.215 263);   /* #2563EB */
+  --color-primary-foreground: oklch(1.000 0.000 263);
+  --color-primary-tint:       oklch(0.965 0.022 263);
+  --color-secondary-indigo:   oklch(0.660 0.100 263);
+  --color-ink:                oklch(0.218 0.000 266);
+  --color-ink-card:           oklch(0.297 0.000 266);
+  --color-ink-text:           oklch(0.985 0.000 266);
+  --color-ink-muted:          oklch(0.770 0.000 266);
+  --color-accent-light:       oklch(0.740 0.138 266);
+  --radius-lg: 0.625rem;
+  --font-sans: "Google Sans","Product Sans",ui-sans-serif,system-ui,sans-serif;
+  --font-mono: ui-monospace,"SF Mono",Consolas,Menlo,monospace;
+}</pre>
+    </div>
+    <p class="lead" style="font-size:13px;margin-top:12px;">Full CSS-variable version (framework-free) plus helper classes ship in the companion <code>sting-theme.css</code>.</p>
+  </section>
+
+  <footer>
+    <span style="font-weight:600;color:var(--foreground);">Sting Runner</span>
+    <span class="mono">Design System · v1 · #2563EB</span>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = document.getElementById(btn.getAttribute('data-t'));
+      navigator.clipboard.writeText(pre.innerText).then(function(){
+        var o = btn.textContent; btn.textContent = 'Copied'; setTimeout(function(){btn.textContent=o;},1400);
+      });
+    });
+  });
+</script>
+</body>
+</html>

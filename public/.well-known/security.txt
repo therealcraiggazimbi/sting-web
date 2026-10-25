@@ -1,0 +1,3 @@
+Contact: craiggazimbi@gmail.com
+Preferred-Languages: en
+Canonical: https://sting.delivery/.well-known/security.txt
