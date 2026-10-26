@@ -3,10 +3,35 @@ import { MapPin } from "lucide-react";
 type Location = { city: string; country: string };
 
 // Hardcoded rather than fetched, so this static page does not need a
-// ConvexProvider at build time. Mirrors `stores` rows with isActive:true in
-// the Convex dev deployment as of 2026-10-26 (none currently) — update this
-// list by hand whenever a store's isActive flag changes.
-const ACTIVE_LOCATIONS: Location[] = [];
+// ConvexProvider at build time. Not derived from Convex `stores` rows —
+// this is the Johannesburg coverage area list given directly by the user.
+const ACTIVE_LOCATIONS: Location[] = [
+  // Johannesburg (Sandton & Traditional Wealth Suburbs)
+  { city: "Sandhurst", country: "South Africa" },
+  { city: "Hyde Park", country: "South Africa" },
+  { city: "Westcliff", country: "South Africa" },
+  { city: "Houghton Estate", country: "South Africa" },
+  { city: "Bryanston", country: "South Africa" },
+  { city: "Dunkeld", country: "South Africa" },
+  { city: "Dunkeld West", country: "South Africa" },
+  { city: "Inanda", country: "South Africa" },
+  { city: "Atholl", country: "South Africa" },
+  { city: "Saxonwold", country: "South Africa" },
+  { city: "Parkview", country: "South Africa" },
+
+  // Midrand & Waterfall Corridor
+  { city: "Waterfall Estate", country: "South Africa" },
+  { city: "Kyalami Estate", country: "South Africa" },
+  { city: "Blue Valley Golf & Country Estate", country: "South Africa" },
+
+  // Fourways, Dainfern & Northern Country Estates
+  { city: "Blair Atholl", country: "South Africa" },
+  { city: "Steyn City", country: "South Africa" },
+  { city: "Dainfern Estate", country: "South Africa" },
+  { city: "Broadacres", country: "South Africa" },
+  { city: "Fourways", country: "South Africa" },
+  { city: "Monaghan Farm", country: "South Africa" },
+];
 
 export function LocationsList() {
   const locations = ACTIVE_LOCATIONS;
