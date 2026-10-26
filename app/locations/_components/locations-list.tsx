@@ -1,36 +1,15 @@
-"use client";
-
-import { useQuery } from "convex/react";
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-import { api as _api } from "@/convex/_generated/api";
 import { MapPin } from "lucide-react";
-
-// Cast needed until `npx convex dev` regenerates types after schema addition
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const api = _api as any;
 
 type Location = { city: string; country: string };
 
-export function LocationsList() {
-  const locations = useQuery(api.stores.activeLocations) as
-    | Location[]
-    | undefined;
+// Hardcoded rather than fetched, so this static page does not need a
+// ConvexProvider at build time. Mirrors `stores` rows with isActive:true in
+// the Convex dev deployment as of 2026-10-26 (none currently) — update this
+// list by hand whenever a store's isActive flag changes.
+const ACTIVE_LOCATIONS: Location[] = [];
 
-  if (locations === undefined) {
-    // Loading state — skeleton rows
-    return (
-      <div className="flex flex-col">
-        {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="py-5 border-b border-border/50 last:border-0">
-            <div
-              className="h-4 rounded bg-muted animate-pulse"
-              style={{ width: `${120 + i * 30}px`, animationDelay: `${i * 80}ms` }}
-            />
-          </div>
-        ))}
-      </div>
-    );
-  }
+export function LocationsList() {
+  const locations = ACTIVE_LOCATIONS;
 
   if (locations.length === 0) {
     return (
